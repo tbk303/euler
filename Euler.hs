@@ -3,7 +3,11 @@ module Euler
   ( primes
   , factor
   , isPalindrome
+  , isPythagoreanTriplet
   ) where
+
+isPythagoreanTriplet :: Integer -> Integer -> Integer -> Bool
+isPythagoreanTriplet a b c = (a < b) && (b < c) && (a^2 + b^2 == c^2)
 
 isPalindrome :: Integer -> Bool
 isPalindrome n = let s = show n in s == (reverse s)
