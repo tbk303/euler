@@ -2,6 +2,8 @@
 module Euler 
   ( primes
   , factor
+  , digits
+  , undigits
   , isPalindrome
   , isPythagoreanTriplet
   ) where
@@ -59,4 +61,17 @@ merge a@(x:xs) b@(y:ys) = case compare x y of
                             EQ -> x: merge xs ys
                             GT -> y: merge a  ys
 merge a        b        = if null a then b else a
+
+digitsRev :: Integral n => n -> n -> [n]
+digitsRev base i = case i of
+        0 -> []
+        _ -> lastDigit : digitsRev base rest
+    where (rest, lastDigit) = quotRem i base
+
+digits :: Integral n => n -> [n]
+digits = reverse . digitsRev 10
+
+undigits :: Integral n => [n] -> n
+undigits = foldl (\ a b -> a * 10 + b) 0
+
 
