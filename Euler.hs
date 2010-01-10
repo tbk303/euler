@@ -1,6 +1,7 @@
 
 module Euler 
   ( primes
+  , fibs
   , factor
   , factorial
   , digits
@@ -8,6 +9,9 @@ module Euler
   , isPalindrome
   , isPythagoreanTriplet
   ) where
+
+fibs :: [Integer]
+fibs = 0 : 1 : (zipWith (+) fibs (tail fibs))
 
 isPythagoreanTriplet :: Integer -> Integer -> Integer -> Bool
 isPythagoreanTriplet a b c = (a < b) && (b < c) && (a^2 + b^2 == c^2)
