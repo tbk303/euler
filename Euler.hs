@@ -2,6 +2,7 @@
 module Euler 
   ( primes
   , factor
+  , factorial
   , digits
   , undigits
   , isPalindrome
@@ -16,6 +17,11 @@ isPalindrome n = let s = show n in s == (reverse s)
 
 factor :: Integer -> Integer -> Integer
 factor a b = if b == 0 then a else factor b (a `mod` b)
+
+factorial :: Integer -> Integer
+factorial 1             = 1
+factorial n | n > 1     = n * factorial (n - 1)
+            | otherwise = error "Factorial only defined for positive numbers"
 
 primes :: [Integer]
 primes = 2:3:5:7:primes' 
