@@ -4,11 +4,14 @@ module Euler
   , fibs
   , factor
   , factorial
+  , factors
   , digits
   , undigits
   , isPalindrome
   , isPythagoreanTriplet
   ) where
+
+import Data.List
 
 fibs :: [Integer]
 fibs = 0 : 1 : (zipWith (+) fibs (tail fibs))
@@ -26,6 +29,14 @@ factorial :: Integer -> Integer
 factorial 1             = 1
 factorial n | n > 1     = n * factorial (n - 1)
             | otherwise = error "Factorial only defined for positive numbers"
+
+factors :: Integral a => a -> [a]
+factors i = factors' i 1 []
+  where
+    factors' n c cs = if c >= n then cs else res
+      where
+        res = let (d, r) = divMod i c in
+              if r == 0 then factors' d (c+1) (if c == d then c:cs else c:d:cs) else factors' n (c+1) cs
 
 primes :: [Integer]
 primes = 2:3:5:7:primes' 
