@@ -7,13 +7,14 @@ main = do
   return ()
 
 result :: Int
-result = maximum [ maxSum x y | x <- [0..19], y <- [0..19]]
+result = maximum [ maxSum x y | x <- [0..16], y <- [0..16]]
   where
-    maxSum x y = maximum [horizontal, vertical, diagonal]
+    maxSum x y = maximum [horizontal, vertical, diagonal1, diagonal2]
       where
         horizontal = product $ map (\d -> gridXY (x + d) y) [0..3] 
-        vertical = product $ map (\d -> gridXY x (y +d)) [0..3]
-        diagonal = product $ map (\d -> gridXY (x + d) (y + d)) [0..3]
+        vertical = product $ map (\d -> gridXY x (y + d)) [0..3]
+        diagonal1 = product $ map (\d -> gridXY (x + d) (y + d)) [0..3]
+        diagonal2 = product $ map (\d -> gridXY (x + d) (y - d + 3)) [0..3]
 
 gridXY :: Int -> Int -> Int
 gridXY x y = (grid !! y) !! x
